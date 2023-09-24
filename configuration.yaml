@@ -1,0 +1,1453 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+
+multiscrape:
+  - name: Bus Barn
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwimrOBShT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEJVUyBCQVJO/end
+    scan_interval: 15
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: bus_barn_rolled_up_flow
+        name: Rolled-Up Flow
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+
+      - unique_id: bus_barn_observed_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        unit_of_measurement: ''
+
+      - unique_id: bus_barn_flow_per_square_foot
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[3].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+
+      - unique_id: bus_barn_daily_total_energy_per_square_foot
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[4].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+
+      - unique_id: bus_barn_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[5].Value.Value | round(3) }}'
+        unit_of_measurement: 'ft2'
+
+      - unique_id: bus_barn_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[7].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+
+      - unique_id: bus_barn_capacity_in_kw
+        name: Capacity in KW
+        value_template: '{{ value_json.Items[8].Value.Value | round(3) }}'
+        unit_of_measurement: ''
+
+      - unique_id: bus_barn_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+
+      - unique_id: bus_barn_technology
+        name: Technology
+        value_template: '{{ value_json.Items[10].Value.Value }}'
+
+      - unique_id: bus_barn_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[11].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+
+      - unique_id: bus_barn_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[12].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+
+      - unique_id: bus_barn_collection_area_description
+        name: Collection Area Description
+        value_template: '{{ value_json.Items[13].Value.Value }}'
+
+      - unique_id: bus_barn_claimed_efficiency
+        name: Claimed Efficiency
+        value_template: '{{ value_json.Items[14].Value.Value }}'
+  - name: Electric Vehicle Charging
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwYTCY6CdT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEVMRUNUUklDIFZFSElDTEUgQ0hBUkdJTkc/end
+    scan_interval: 15
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: electric_vehicle_rolled_up_flow
+        name: Rolled-Up Flow
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+
+      - unique_id: electric_vehicle_observed_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        unit_of_measurement: ''
+
+      - unique_id: electric_vehicle_flow_per_square_foot
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[3].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+
+      - unique_id: electric_vehicle_daily_total_energy_per_square_foot
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[4].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+
+      - unique_id: electric_vehicle_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[5].Value.Value | round(3) }}'
+        unit_of_measurement: 'ft2'
+
+      - unique_id: electric_vehicle_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[7].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+
+      - unique_id: electric_vehicle_capacity_in_kw
+        name: Capacity in KW
+        value_template: '{{ value_json.Items[8].Value.Value | round(3) }}'
+        unit_of_measurement: ''
+
+      - unique_id: electric_vehicle_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+
+      - unique_id: electric_vehicle_technology
+        name: Technology
+        value_template: '{{ value_json.Items[10].Value.Value }}'
+
+      - unique_id: electric_vehicle_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[11].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+
+      - unique_id: electric_vehicle_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[12].Value.Value | round(3) }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+
+      - unique_id: electric_vehicle_collection_area_description
+        name: Collection Area Description
+        value_template: '{{ value_json.Items[13].Value.Value }}'
+
+      - unique_id: electric_vehicle_claimed_efficiency
+        name: Claimed Efficiency
+        value_template: '{{ value_json.Items[14].Value.Value }}'
+  - name: Bus Barn Sub Array 5K 1
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwQGm0QUVT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEJVUyBCQVJOXFNPTEFSIENPTExFQ1RPUiA1SyAx/end
+    scan_interval: 32
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: bus_barn_sub_array_5k_1_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: bus_barn_sub_array_5k_1_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_5k_1_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_5k_1_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: bus_barn_sub_array_5k_1_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: bus_barn_sub_array_5k_1_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_5k_1_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_5k_1_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_5k_1_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_5k_1_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_5k_1_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'measurement'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_5k_1_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Bus Barn Sub Array 5K 2
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwly-e90dT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEJVUyBCQVJOXFNPTEFSIENPTExFQ1RPUiA1SyAy/end
+    scan_interval: 32
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: bus_barn_sub_array_5k_2_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: bus_barn_sub_array_5k_2_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_5k_2_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_5k_2_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: bus_barn_sub_array_5k_2_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: bus_barn_sub_array_5k_2_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_5k_2_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_5k_2_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_5k_2_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_5k_2_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_5k_2_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'measurement'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_5k_2_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Bus Barn Sub Array 7K 1
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwYE-MDkhT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEJVUyBCQVJOXFNPTEFSIENPTExFQ1RPUiA3SyAx/end
+    scan_interval: 32
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: bus_barn_sub_array_7k_1_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: bus_barn_sub_array_7k_1_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_1_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_1_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: bus_barn_sub_array_7k_1_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: bus_barn_sub_array_7k_1_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_1_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_1_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_1_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_1_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_1_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'measurement'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_1_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Bus Barn Sub Array 7K 2
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwI-4zYEhT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEJVUyBCQVJOXFNPTEFSIENPTExFQ1RPUiA3SyAy/end
+    scan_interval: 32
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: bus_barn_sub_array_7k_2_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: bus_barn_sub_array_7k_2_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_2_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_2_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: bus_barn_sub_array_7k_2_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: bus_barn_sub_array_7k_2_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_2_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_2_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_2_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_2_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_2_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'measurement'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_2_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Bus Barn Sub Array 7K 3
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwHRyKakhT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEJVUyBCQVJOXFNPTEFSIENPTExFQ1RPUiA3SyAz/end
+    scan_interval: 32
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: bus_barn_sub_array_7k_3_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: bus_barn_sub_array_7k_3_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_3_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_3_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: bus_barn_sub_array_7k_3_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: bus_barn_sub_array_7k_3_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_3_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_3_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_3_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_3_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_3_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'measurement'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_3_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Bus Barn Sub Array 7K 4
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwtm4bdkhT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEJVUyBCQVJOXFNPTEFSIENPTExFQ1RPUiA3SyA0/end
+    scan_interval: 32
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: bus_barn_sub_array_7k_4_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: bus_barn_sub_array_7k_4_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_4_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_4_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: bus_barn_sub_array_7k_4_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: bus_barn_sub_array_7k_4_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_4_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_4_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_4_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_4_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: bus_barn_sub_array_7k_4_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'measurement'
+        unit_of_measurement: 'kWh'
+      - unique_id: bus_barn_sub_array_7k_4_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Electric Vehicle Sub Array 6K 1
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwAoPNbSlT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEVMRUNUUklDIFZFSElDTEUgQ0hBUkdJTkdcU09MQVIgQ09MTEVDVE9SIDZLIDE/end
+    scan_interval: 33
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: electric_vehicle_sub_array_6k_1_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: electric_vehicle_sub_array_6k_1_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_6k_1_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_6k_1_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: electric_vehicle_sub_array_6k_1_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: electric_vehicle_sub_array_6k_1_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_6k_1_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_6k_1_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_6k_1_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_6k_1_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_6k_1_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'measurement'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_6k_1_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Electric Vehicle Sub Array 7K 1
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwwCi3SjdT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEVMRUNUUklDIFZFSElDTEUgQ0hBUkdJTkdcU09MQVIgQ09MTEVDVE9SIDdLIDE/end
+    scan_interval: 33
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: electric_vehicle_sub_array_7k_1_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: electric_vehicle_sub_array_7k_1_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_1_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_1_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: electric_vehicle_sub_array_7k_1_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: electric_vehicle_sub_array_7k_1_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_1_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_1_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_1_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_1_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_1_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'measurement'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_1_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Electric Vehicle Sub Array 7K 2
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWw5MHAtjdT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEVMRUNUUklDIFZFSElDTEUgQ0hBUkdJTkdcU09MQVIgQ09MTEVDVE9SIDdLIDI/end
+    scan_interval: 33
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: electric_vehicle_sub_array_7k_2_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: electric_vehicle_sub_array_7k_2_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_2_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_2_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: electric_vehicle_sub_array_7k_2_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: electric_vehicle_sub_array_7k_2_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_2_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_2_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_2_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_2_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_2_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'measurement'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_2_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Electric Vehicle Sub Array 7K 3
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwZDoD3DdT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEVMRUNUUklDIFZFSElDTEUgQ0hBUkdJTkdcU09MQVIgQ09MTEVDVE9SIDdLIDM/end
+    scan_interval: 33
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: electric_vehicle_sub_array_7k_3_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: electric_vehicle_sub_array_7k_3_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_3_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_3_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: electric_vehicle_sub_array_7k_3_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: electric_vehicle_sub_array_7k_3_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_3_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_3_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_3_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_3_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_3_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'measurement'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_3_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Electric Vehicle Sub Array 7K 4
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwFhpd5zdT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEVMRUNUUklDIFZFSElDTEUgQ0hBUkdJTkdcU09MQVIgQ09MTEVDVE9SIDdLIDQ/end
+    scan_interval: 33
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: electric_vehicle_sub_array_7k_4_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: electric_vehicle_sub_array_7k_4_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_4_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_4_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: electric_vehicle_sub_array_7k_4_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: electric_vehicle_sub_array_7k_4_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_4_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_4_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_4_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_4_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_4_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'measurement'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_4_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Electric Vehicle Sub Array 7K 5
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwqCTL9jdT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEVMRUNUUklDIFZFSElDTEUgQ0hBUkdJTkdcU09MQVIgQ09MTEVDVE9SIDdLIDU/end
+    scan_interval: 33
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: electric_vehicle_sub_array_7k_5_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: electric_vehicle_sub_array_7k_5_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_5_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_5_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: electric_vehicle_sub_array_7k_5_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: electric_vehicle_sub_array_7k_5_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_5_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_5_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_5_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_5_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_5_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'measurement'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_5_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Electric Vehicle Sub Array 7K 6
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWws_ZwAThT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEVMRUNUUklDIFZFSElDTEUgQ0hBUkdJTkdcU09MQVIgQ09MTEVDVE9SIDdLIDY/end
+    scan_interval: 33
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: electric_vehicle_sub_array_7k_6_conversion_efficiency
+        name: Observed Conversion Efficiency
+        value_template: '{{ value_json.Items[0].Value.Value | round(3) }}'
+        unit_of_measurement: '%'
+        state_class: 'measurement'
+      - unique_id: electric_vehicle_sub_array_7k_6_flow_per_sqft
+        name: Flow per Square Foot
+        value_template: '{{ value_json.Items[1].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_6_daily_total_energy_per_sqft
+        name: Daily Total Energy per Square Foot
+        value_template: '{{ value_json.Items[2].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_6_collection_area
+        name: Collection Area
+        value_template: '{{ value_json.Items[3].Value.Value }}'
+        state_class: 'measurement'
+        unit_of_measurement: 'ft2'
+      - unique_id: electric_vehicle_sub_array_7k_6_conversion_factor
+        name: Conversion Factor
+        value_template: '{{ value_json.Items[5].Value.Value | round(9) }}'
+        unit_of_measurement: ''
+      - unique_id: electric_vehicle_sub_array_7k_6_capacity
+        name: Capacity
+        value_template: '{{ value_json.Items[6].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_6_kwh_tag
+        name: KWH Tag
+        value_template: '{{ value_json.Items[7].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_6_daily_total
+        name: Daily Total
+        value_template: '{{ value_json.Items[9].Value.Value | round(3) }}'
+        device_class: 'energy'
+        state_class: 'total'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_6_flow_tag
+        name: Flow Tag
+        value_template: '{{ value_json.Items[10].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_6_outdoor_temp
+        name: Outdoor Temp
+        value_template: '{{ value_json.Items[15].Value.Value | round(3) }}'
+        device_class: 'power'
+        state_class: 'measurement'
+        unit_of_measurement: 'kW'
+      - unique_id: electric_vehicle_sub_array_7k_6_daily_energy_available
+        name: Daily Energy Available
+        value_template: '{{ value_json.Items[16].Value.Value | round(3) }}'
+        device_class: 'energy'
+        unit_of_measurement: 'kWh'
+      - unique_id: electric_vehicle_sub_array_7k_6_units_per_day
+        name: Units Per Day
+        value_template: '{{ value_json.Items[17].Value.Value | round(3) }}'
+  - name: Campus Grid Purchase Power
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1DPQfqY_bGnwEKLycN0yWeqGAky8AAAUElTRVJWRVIuRkFDSUxJVElFUy5VSU9XQS5FRFVcRUxfQ0FNUFVTX1BVUl9NVw/value
+    scan_interval: 50
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: campus_grid_purchased
+        name: Campus Grid Purchased
+        value_template: '{{ value_json.Value * 1000 | round(3) }}'
+        unit_of_measurement: 'kW'
+        device_class: 'power'
+        state_class: 'measurement'
+  - name: Campus Grid Purchase Energy Forward
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1DPQfqY_bGnwEKLycN0yWeqGAlC8AAAUElTRVJWRVIuRkFDSUxJVElFUy5VSU9XQS5FRFVcRUxfQ0FNUFVTX1BVUiBfRldEX0tXSA/value
+    scan_interval: 160
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: campus_grid_purchase_energy_forward
+        name: Campus Grid Purchase Energy Forward
+        value_template: '{{ value_json.Value | round(3) }}'
+        unit_of_measurement: 'kWh'
+        device_class: 'energy'
+        state_class: 'measurement'
+  - name: Campus Grid Purchase Energy Reverse
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1DPQfqY_bGnwEKLycN0yWeqGAlS8AAAUElTRVJWRVIuRkFDSUxJVElFUy5VSU9XQS5FRFVcRUxfQ0FNUFVTX1BVUiBfUkVWX0tXSA/value
+    scan_interval: 160
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: campus_grid_purchase_energy_reverse
+        name: Campus Grid Purchase Energy Reverse
+        value_template: '{{ value_json.Value | round(3) }}'
+        unit_of_measurement: 'kWh'
+        device_class: 'energy'
+        state_class: 'measurement'
+  - name: Campus Generation Power
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1DPQfqY_bGnwEKLycN0yWeqGAkC8AAAUElTRVJWRVIuRkFDSUxJVElFUy5VSU9XQS5FRFVcRUxfQ0FNUFVTX0dFTl9NVw/value
+    scan_interval: 180
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: campus_grid_generation
+        name: Campus Generation
+        value_template: '{{ value_json.Value * 1000 | round(3) }}'
+        unit_of_measurement: 'kW'
+        device_class: 'power'
+        state_class: 'measurement'
+  - name: Campus Generation Energy Forward
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1DPQfqY_bGnwEKLycN0yWeqGAkS8AAAUElTRVJWRVIuRkFDSUxJVElFUy5VSU9XQS5FRFVcRUxfQ0FNUFVTX0dFTiBfRldEX0tXSA/value
+    scan_interval: 160
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: campus_grid_generation_energy_forward
+        name: Campus Generation Energy Forward
+        value_template: '{{ value_json.Value | round(3) }}'
+        unit_of_measurement: 'kWh'
+        device_class: 'energy'
+        state_class: 'measurement'
+  - name: Campus Generation Energy Reverse
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1DPQfqY_bGnwEKLycN0yWeqGAki8AAAUElTRVJWRVIuRkFDSUxJVElFUy5VSU9XQS5FRFVcRUxfQ0FNUFVTX0dFTiBfUkVWX0tXSA/value
+    scan_interval: 160
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: campus_grid_generation_energy_reverse
+        name: Campus Generation Energy Reverse
+        value_template: '{{ value_json.Value | round(3) }}'
+        unit_of_measurement: 'kWh'
+        device_class: 'energy'
+        state_class: 'measurement'
+  - name: "CO Total"
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1AbEAVYciAZHVU6DzQbJjxTxWwlZu9V7dJ6RGuHFS_ZKR9xgBJLlqJ1weE-L_RNcPAj99ASVRTTlQyMjU5XFBJREItQUZcVU5JVkVSU0lUWSBPRiBJT1dBXEVNSVNTSU9OfENPIFRPVEFMIDEgTU9OVEg/value
+    scan_interval: 11
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: co_total
+        name: "CO Total"
+        value_template: >
+          {% if value_json.Value < 0 %}
+            0.0
+          {% else %}
+            {{ value_json.Value | round(3)}}
+          {% endif %}
+        unit_of_measurement: "tons"
+        icon: mdi:molecule-co2
+  - name: "VOC Total"
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1AbEAVYciAZHVU6DzQbJjxTxWwlZu9V7dJ6RGuHFS_ZKR9xg5qAnpKu5yUiWlNpHMpaMeASVRTTlQyMjU5XFBJREItQUZcVU5JVkVSU0lUWSBPRiBJT1dBXEVNSVNTSU9OfFZPQyBUT1RBTCAxIE1PTlRI/value
+    scan_interval: 11
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: voc_total
+        name: "VOC Total"
+        value_template: >
+          {% if value_json.Value < 0 %}
+            0.0
+          {% else %}
+            {{ value_json.Value | round(3)}}
+          {% endif %}
+        unit_of_measurement: "tons"
+        icon: mdi:nuke
+  - name: "SO2 Total"
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1AbEAVYciAZHVU6DzQbJjxTxWwlZu9V7dJ6RGuHFS_ZKR9xgiYbRaoN9f0uE86a3UoszYgSVRTTlQyMjU5XFBJREItQUZcVU5JVkVSU0lUWSBPRiBJT1dBXEVNSVNTSU9OfFNPMiBUT1RBTCAxIE1PTlRI/value
+    scan_interval: 11
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: so2_total
+        name: "SO2 Total"
+        value_template: >
+          {% if value_json.Value < 0 %}
+            0.0
+          {% else %}
+            {{ value_json.Value | round(3)}}
+          {% endif %}
+        unit_of_measurement: "tons"
+        icon: mdi:chemical-weapon
+  - name: "NOx Total"
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1AbEAVYciAZHVU6DzQbJjxTxWwlZu9V7dJ6RGuHFS_ZKR9xgZp_fzNAKs0eKAnaToqPjqASVRTTlQyMjU5XFBJREItQUZcVU5JVkVSU0lUWSBPRiBJT1dBXEVNSVNTSU9OfE5PWCBUT1RBTCAxIE1PTlRI/value
+    scan_interval: 11
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: nox_total
+        name: "NOx Total"
+        value_template: >
+          {% if value_json.Value < 0 %}
+            0.0
+          {% else %}
+            {{ value_json.Value | round(3)}}
+          {% endif %}
+        unit_of_measurement: "tons"
+        icon: mdi:chemical-weapon
+  - name: "PM Total"
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1AbEAVYciAZHVU6DzQbJjxTxWwlZu9V7dJ6RGuHFS_ZKR9xg5W1gyw68B0G3-KcGVfTZgASVRTTlQyMjU5XFBJREItQUZcVU5JVkVSU0lUWSBPRiBJT1dBXEVNSVNTSU9OfFBNIFRPVEFMIDEgTU9OVEg/value
+    scan_interval: 11
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: pm_total
+        name: "PM Total"
+        value_template: >
+          {% if value_json.Value < 0 %}
+            0.0
+          {% else %}
+            {{ value_json.Value | round(3)}}
+          {% endif %}
+        unit_of_measurement: "tons"
+        icon: mdi:weather-dust
+  - name: "PM10 Total"
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1AbEAVYciAZHVU6DzQbJjxTxWwlZu9V7dJ6RGuHFS_ZKR9xgs2X4pXUx60yjb3_5uh1zqASVRTTlQyMjU5XFBJREItQUZcVU5JVkVSU0lUWSBPRiBJT1dBXEVNSVNTSU9OfFBNMTAgVE9UQUwgMSBNT05USA/value
+    scan_interval: 11
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: pm10_total
+        name: "PM10 Total"
+        value_template: >
+          {% if value_json.Value < 0 %}
+            0.0
+          {% else %}
+            {{ value_json.Value | round(3)}}
+          {% endif %}
+        unit_of_measurement: "tons"
+        icon: mdi:weather-dust
+  - name: "PM25 Total"
+    resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/F1AbEAVYciAZHVU6DzQbJjxTxWwlZu9V7dJ6RGuHFS_ZKR9xg48o7yzsWnkiSWLUIbDm7dQSVRTTlQyMjU5XFBJREItQUZcVU5JVkVSU0lUWSBPRiBJT1dBXEVNSVNTSU9OfFBNMjUgVE9UQUwgMSBNT05USA/value
+    scan_interval: 11
+    username: "mundus@uiowa.edu"
+    password: "bigflex,yeah,P90X"
+    sensor:
+      - unique_id: pm25_total
+        name: "PM25 Total"
+        value_template: >
+          {% if value_json.Value < 0 %}
+            0.0
+          {% else %}
+            {{ value_json.Value | round(3)}}
+          {% endif %}
+        unit_of_measurement: "tons"
+        icon: mdi:weather-dust
+
+sensor:
+  - platform: template
+    sensors:
+      bus_barn_status:
+        friendly_name: "Bus Barn Array"
+        icon_template: "mdi:solar-panel-large"
+        value_template: >-
+          {% if states('sensor.bus_barn_rolled_up_flow')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.bus_barn_rolled_up_flow
+      electric_vehicle_status:
+        friendly_name: "Electric Vehicle Charging Array"
+        icon_template: "mdi:solar-panel-large"
+        value_template: >-
+          {% if states('sensor.electric_vehicle_rolled_up_flow')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.electric_vehicle_rolled_up_flow
+      bus_barn_sub_array_5k_1_status:
+        friendly_name: "5k 1"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.bus_barn_sub_array_5k_1_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.bus_barn_sub_array_5k_1_flow_tag
+      bus_barn_sub_array_5k_2_status:
+        friendly_name: "5k 2"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.bus_barn_sub_array_5k_2_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.bus_barn_sub_array_5k_2_flow_tag
+      bus_barn_sub_array_7k_1_status:
+        friendly_name: "7k 1"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.bus_barn_sub_array_7k_1_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.bus_barn_sub_array_7k_1_flow_tag
+      bus_barn_sub_array_7k_2_status:
+        friendly_name: "7k 2"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.bus_barn_sub_array_7k_2_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.bus_barn_sub_array_7k_2_flow_tag
+      bus_barn_sub_array_7k_3_status:
+        friendly_name: "7k 3"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.bus_barn_sub_array_7k_3_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.bus_barn_sub_array_7k_3_flow_tag
+      bus_barn_sub_array_7k_4_status:
+        friendly_name: "7k 4"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.bus_barn_sub_array_7k_4_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.bus_barn_sub_array_7k_4_flow_tag
+      electric_vehicle_sub_array_6k_1_status:
+        friendly_name: "6k 1"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.electric_vehicle_sub_array_6k_1_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.electric_vehicle_sub_array_6k_1_flow_tag
+      electric_vehicle_sub_array_7k_1_status:
+        friendly_name: "7k 1"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.electric_vehicle_sub_array_7k_1_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.electric_vehicle_sub_array_7k_1_flow_tag
+      electric_vehicle_sub_array_7k_2_status:
+        friendly_name: "7k 2"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.electric_vehicle_sub_array_7k_2_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.electric_vehicle_sub_array_7k_2_flow_tag
+      electric_vehicle_sub_array_7k_3_status:
+        friendly_name: "7k 3"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.electric_vehicle_sub_array_7k_3_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.electric_vehicle_sub_array_7k_3_flow_tag
+      electric_vehicle_sub_array_7k_4_status:
+        friendly_name: "7k 4"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.electric_vehicle_sub_array_7k_4_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.electric_vehicle_sub_array_7k_4_flow_tag  
+      electric_vehicle_sub_array_7k_5_status:
+        friendly_name: "7k 5"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.electric_vehicle_sub_array_7k_5_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.electric_vehicle_sub_array_7k_5_flow_tag
+      electric_vehicle_sub_array_7k_6_status:
+        friendly_name: "7k 6"
+        icon_template: "mdi:solar-panel"
+        value_template: >-
+          {% if states('sensor.electric_vehicle_sub_array_7k_6_flow_tag')|float > 0 %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+        entity_id:
+          - sensor.electric_vehicle_sub_array_7k_6_flow_tag
+      
+      combined_flow:
+        friendly_name: Combined Flow
+        icon_template: mdi:solar-power-variant
+        value_template: >-
+          {{ (states('sensor.bus_barn_rolled_up_flow')|float+states('sensor.electric_vehicle_rolled_up_flow')|float)|round(3)}}
+        
