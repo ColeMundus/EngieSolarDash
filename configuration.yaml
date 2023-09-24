@@ -15,8 +15,8 @@ multiscrape:
   - name: Bus Barn
     resource: https://itsnt2259.iowa.uiowa.edu/piwebapi/streamsets/F1EmAVYciAZHVU6DzQbJjxTxWwimrOBShT7hGiW-T9RdLVfgSVRTTlQyMjU5XFJZQU4gU0FOREJPWFxTT0xBUiBQUk9EVUNUSU9OXEJVUyBCQVJO/end
     scan_interval: 15
-    username: "mundus@uiowa.edu"
-    password: "bigflex,yeah,P90X"
+    username: !secret hid_user
+    password: !secret hid_pass
     sensor:
       - unique_id: bus_barn_rolled_up_flow
         name: Rolled-Up Flow
