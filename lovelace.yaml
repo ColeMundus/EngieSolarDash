@@ -1,0 +1,767 @@
+title: University of Iowa Solar
+views:
+  - path: default_view
+    title: Main
+    type: sidebar
+    badges: []
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mushroom-title-card
+            title: Solar Daily Forecast and Monitoring
+          - square: false
+            type: grid
+            cards:
+              - type: custom:horizon-card
+              - square: true
+                type: grid
+                cards:
+                  - type: custom:flex-horseshoe-card
+                    entities:
+                      - entity: sensor.bus_barn_daily_total
+                        area: Actual
+                        name: Bus Barn
+                      - entity: sensor.energy_production_today_3
+                        area: Estimated
+                    show:
+                      horseshoe_style: lineargradient
+                      scale_tickmarks: true
+                    layout:
+                      states:
+                        - id: 0
+                          entity_index: 0
+                          xpos: 50
+                          ypos: 68
+                          styles:
+                            - font-size: 3em;
+                        - id: 1
+                          entity_index: 1
+                          xpos: 50
+                          ypos: 42
+                          styles:
+                            - font-size: 3em;
+                      areas:
+                        - id: 0
+                          entity_index: 0
+                          xpos: 50
+                          ypos: 51
+                          styles:
+                            - font-size: 1.2em;
+                            - color: gray
+                        - id: 0
+                          entity_index: 1
+                          xpos: 50
+                          ypos: 25
+                          styles:
+                            - font-size: 1.2em;
+                            - color: gray
+                      names:
+                        - id: 0
+                          entity_index: 0
+                          xpos: 50
+                          ypos: 95
+                          styles:
+                            - font-size: 2em;
+                            - color: gray
+                    horseshoe_scale:
+                      min: 0
+                      max: 18
+                    color_stops:
+                      '0': red
+                      '18': green
+                  - type: custom:flex-horseshoe-card
+                    entities:
+                      - entity: sensor.electric_vehicle_daily_total
+                        area: Actual
+                        name: EV Charging
+                      - entity: sensor.energy_production_today_2
+                        area: Estimated
+                    show:
+                      horseshoe_style: lineargradient
+                      scale_tickmarks: true
+                    layout:
+                      states:
+                        - id: 0
+                          entity_index: 0
+                          xpos: 50
+                          ypos: 68
+                          styles:
+                            - font-size: 3em;
+                        - id: 1
+                          entity_index: 1
+                          xpos: 50
+                          ypos: 42
+                          styles:
+                            - font-size: 3em;
+                      areas:
+                        - id: 0
+                          entity_index: 0
+                          xpos: 50
+                          ypos: 51
+                          styles:
+                            - font-size: 1.2em;
+                            - color: gray
+                        - id: 0
+                          entity_index: 1
+                          xpos: 50
+                          ypos: 25
+                          styles:
+                            - font-size: 1.2em;
+                            - color: gray
+                      names:
+                        - id: 0
+                          entity_index: 0
+                          xpos: 50
+                          ypos: 95
+                          styles:
+                            - font-size: 2em;
+                            - color: gray
+                    horseshoe_scale:
+                      min: 0
+                      max: 18
+                    color_stops:
+                      '0': red
+                      '18': green
+                columns: 2
+            columns: 2
+          - square: false
+            type: grid
+            cards:
+              - square: false
+                type: grid
+                cards:
+                  - show_name: true
+                    show_icon: true
+                    show_state: true
+                    type: glance
+                    entities:
+                      - entity: sensor.energy_current_hour_4
+                        name: Current Hour
+                      - entity: sensor.energy_next_hour_4
+                        name: Next Hour
+                      - entity: sensor.energy_production_today_4
+                        name: Today
+                        icon: mdi:sun-clock
+                      - entity: sensor.energy_production_today_remaining_4
+                        name: Today Left
+                        icon: mdi:calendar-end
+                      - entity: sensor.energy_production_tomorrow_4
+                        name: Tomorrow
+                        icon: mdi:hours-24
+                    title: Energy Production Estimates
+                  - type: custom:hourly-weather
+                    entity: weather.openweathermap
+                    num_segments: '12'
+                    icons: true
+                    show_wind: barb-and-speed
+                    show_date: boundary
+                columns: 1
+              - type: energy-solar-graph
+                title: Energy Production History
+            columns: 2
+        columns: 1
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mushroom-title-card
+            title: Power
+          - type: custom:power-flow-card-plus
+            entities:
+              home:
+                name: Campus
+                icon: mdi:domain
+              solar:
+                entity: sensor.combined_flow
+                color_value: false
+                display_zero_state: true
+                icon: mdi:solar-power-variant
+              grid:
+                entity: sensor.campus_grid_purchased
+                unit_of_measurement: kW
+              individual1:
+                entity: sensor.campus_grid_generation
+                name: Power Plants
+                inverted_animation: true
+                show_direction: false
+                display_zero_state: false
+                display_zero: false
+                icon: mdi:factory
+                color_value: false
+              battery: {}
+            clickable_entities: true
+            display_zero_lines:
+              mode: show
+              transparency: 50
+              grey_color:
+                - 189
+                - 189
+                - 189
+            use_new_flow_rate_model: true
+            w_decimals: 0
+            kw_decimals: 1
+            min_flow_rate: 0.75
+            max_flow_rate: 6
+            max_expected_power: 2000
+            min_expected_power: 0.01
+            watt_threshold: 1000
+            transparency_zero_lines: 0
+            view_layout:
+              position: sidebar
+          - type: custom:plotly-graph
+            entities:
+              - entity: sensor.campus_grid_purchased
+                fill: tozeroy
+                name: Grid
+              - entity: sensor.campus_grid_generation
+                fill: tozeroy
+                name: Campus
+              - entity: sensor.combined_flow
+                fill: tozeroy
+            hours_to_show: 12
+            refresh_interval: 10
+            config:
+              scrollZoom: false
+            layout:
+              xaxis:
+                rangeselector:
+                  'y': 1.15
+                  buttons:
+                    - count: 1
+                      step: hour
+                    - count: 12
+                      step: hour
+                    - count: 1
+                      step: day
+                    - count: 7
+                      step: day
+        columns: 1
+        view_layout:
+          position: sidebar
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-title-card
+            title: Grid Carbon Monitoring
+          - type: horizontal-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: gauge
+                    entity: sensor.electricity_maps_co2_intensity
+                    severity:
+                      green: 0
+                      yellow: 150
+                      red: 500
+                    name: Grid Carbon Intensity
+                    needle: true
+                    max: 650
+                    min: 0
+                  - type: gauge
+                    entity: sensor.electricity_maps_grid_fossil_fuel_percentage
+                    name: Grid Fossil Fuel Precentage
+                    needle: false
+                    severity:
+                      green: 0
+                      yellow: 15
+                      red: 30
+              - type: custom:plotly-graph
+                entities:
+                  - entity: sensor.electricity_maps_co2_intensity
+                hours_to_show: 12
+                refresh_interval: 10
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mushroom-title-card
+            title: Pollutants
+          - square: true
+            type: grid
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.co_total
+                line_color: red
+                line_width: 8
+                font_size: 75
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.voc_total
+                line_color: red
+                line_width: 8
+                font_size: 75
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.so2_total
+                line_color: red
+                line_width: 8
+                font_size: 75
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.nox_total
+                line_color: red
+                line_width: 8
+                font_size: 75
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.pm_total
+                line_color: red
+                line_width: 8
+                font_size: 75
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.pm10_total
+                line_color: red
+                line_width: 8
+                font_size: 75
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.pm25_total
+                line_color: red
+                line_width: 8
+                font_size: 75
+            columns: 7
+        columns: 1
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mushroom-title-card
+            title: Bus Barn Array
+          - type: custom:energy-overview-card
+            entities:
+              - power: sensor.bus_barn_rolled_up_flow
+                icon_leading: mdi:solar-panel-large
+                label_leading: 38k
+                icon_trailing: mdi:domain
+                color: green
+                animation: {}
+            order_by: ''
+            animation:
+              power: 38000
+          - type: custom:energy-overview-card
+            entities:
+              - power: sensor.bus_barn_sub_array_5k_1_flow_tag
+                label_leading: 5k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+                animation:
+                  power: 5000
+              - power: sensor.bus_barn_sub_array_5k_2_flow_tag
+                label_leading: 5k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+                animation:
+                  power: 5000
+              - power: sensor.bus_barn_sub_array_7k_1_flow_tag
+                label_leading: 7k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+              - power: sensor.bus_barn_sub_array_7k_2_flow_tag
+                label_leading: 7k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+              - power: sensor.bus_barn_sub_array_7k_3_flow_tag
+                label_leading: 7k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+              - power: sensor.bus_barn_sub_array_7k_4_flow_tag
+                label_leading: 7k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+            order_by: ''
+            animation:
+              power: 7000
+            view_layout:
+              position: sidebar
+          - type: custom:mushroom-title-card
+            title: Electric Vehicle Charging Array
+          - type: custom:energy-overview-card
+            entities:
+              - power: sensor.bus_barn_rolled_up_flow
+                icon_leading: mdi:solar-panel-large
+                label_leading: 49.5k
+                icon_trailing: mdi:domain
+                color: green
+                animation: {}
+            order_by: ''
+            animation:
+              power: 49500
+          - type: custom:energy-overview-card
+            entities:
+              - power: sensor.electric_vehicle_sub_array_6k_1_flow_tag
+                label_leading: 6k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+                animation:
+                  power: 6000
+              - power: sensor.electric_vehicle_sub_array_7k_1_flow_tag
+                label_leading: 7k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+              - power: sensor.electric_vehicle_sub_array_7k_2_flow_tag
+                label_leading: 7k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+              - power: sensor.electric_vehicle_sub_array_7k_3_flow_tag
+                label_leading: 7k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+              - power: sensor.electric_vehicle_sub_array_7k_4_flow_tag
+                label_leading: 7k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+              - power: sensor.electric_vehicle_sub_array_7k_5_flow_tag
+                label_leading: 7k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+              - power: sensor.electric_vehicle_sub_array_7k_6_flow_tag
+                label_leading: 7k
+                icon_leading: mdi:solar-panel
+                icon_trailing: mdi:domain
+                color: orange
+            order_by: ''
+            animation:
+              power: 7000
+            view_layout:
+              position: sidebar
+        columns: 1
+        view_layout:
+          position: sidebar
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mushroom-title-card
+            title: Sub Array Monitoring
+            subtitle: >-
+              There are {{ states | selectattr('entity_id', 'match',
+              '.*sub_array.*_status$') | selectattr('state', 'eq', 'Active') |
+              list | count }} of {{ states | selectattr('entity_id', 'match',
+              '.*sub_array.*_status$') | list | count }} active sub arrays. No
+              faults detected.
+          - square: false
+            type: grid
+            cards:
+              - type: history-graph
+                entities:
+                  - entity: sun.sun
+                  - entity: sensor.bus_barn_sub_array_5k_1_status
+                  - entity: sensor.bus_barn_sub_array_5k_2_status
+                  - entity: sensor.bus_barn_sub_array_7k_1_status
+                  - entity: sensor.bus_barn_sub_array_7k_2_status
+                  - entity: sensor.bus_barn_sub_array_7k_3_status
+                  - entity: sensor.bus_barn_sub_array_7k_4_status
+                title: Bus Barn Array
+              - type: history-graph
+                entities:
+                  - entity: sun.sun
+                  - entity: sensor.electric_vehicle_sub_array_6k_1_status
+                  - entity: sensor.electric_vehicle_sub_array_7k_1_status
+                  - entity: sensor.electric_vehicle_sub_array_7k_2_status
+                  - entity: sensor.electric_vehicle_sub_array_7k_3_status
+                  - entity: sensor.electric_vehicle_sub_array_7k_4_status
+                  - entity: sensor.electric_vehicle_sub_array_7k_5_status
+                  - entity: sensor.electric_vehicle_sub_array_7k_6_status
+                title: EV Charing Array
+              - square: true
+                type: grid
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.bus_barn_sub_array_7k_1_flow_tag
+                    name: BA-7k-1
+                    line_color: orange
+                    line_width: 8
+                    hours_to_show: 12
+                    icon: mdi:solar-panel
+                    color_thresholds:
+                      - value: 0
+                        color: '#ff0000'
+                      - value: 0.5
+                        color: '#ffff00'
+                      - value: 1
+                        color: '#00ff00'
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.bus_barn_sub_array_7k_2_flow_tag
+                    name: BA-7k-2
+                    line_color: orange
+                    line_width: 8
+                    hours_to_show: 12
+                    icon: mdi:solar-panel
+                    color_thresholds:
+                      - value: 0
+                        color: '#ff0000'
+                      - value: 0.5
+                        color: '#ffff00'
+                      - value: 1
+                        color: '#00ff00'
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.bus_barn_sub_array_7k_3_flow_tag
+                    name: BA-7k-3
+                    line_color: orange
+                    line_width: 8
+                    hours_to_show: 12
+                    icon: mdi:solar-panel
+                    color_thresholds:
+                      - value: 0
+                        color: '#ff0000'
+                      - value: 0.5
+                        color: '#ffff00'
+                      - value: 1
+                        color: '#00ff00'
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.bus_barn_sub_array_7k_4_flow_tag
+                    name: BA-7k-4
+                    line_color: orange
+                    line_width: 8
+                    hours_to_show: 12
+                    icon: mdi:solar-panel
+                    color_thresholds:
+                      - value: 0
+                        color: '#ff0000'
+                      - value: 0.5
+                        color: '#ffff00'
+                      - value: 1
+                        color: '#00ff00'
+                columns: 2
+              - square: true
+                type: grid
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.electric_vehicle_sub_array_7k_1_flow_tag
+                    name: EV-7k-1
+                    line_color: orange
+                    line_width: 8
+                    hours_to_show: 12
+                    icon: mdi:solar-panel
+                    color_thresholds:
+                      - value: 0
+                        color: '#ff0000'
+                      - value: 0.5
+                        color: '#ffff00'
+                      - value: 1
+                        color: '#00ff00'
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.electric_vehicle_sub_array_7k_2_flow_tag
+                    name: EV-7k-2
+                    line_color: orange
+                    line_width: 8
+                    hours_to_show: 12
+                    icon: mdi:solar-panel
+                    color_thresholds:
+                      - value: 0
+                        color: '#ff0000'
+                      - value: 0.5
+                        color: '#ffff00'
+                      - value: 1
+                        color: '#00ff00'
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.electric_vehicle_sub_array_7k_4_flow_tag
+                    name: EV-7k-4
+                    line_color: orange
+                    line_width: 8
+                    hours_to_show: 12
+                    icon: mdi:solar-panel
+                    color_thresholds:
+                      - value: 0
+                        color: '#ff0000'
+                      - value: 0.5
+                        color: '#ffff00'
+                      - value: 1
+                        color: '#00ff00'
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.electric_vehicle_sub_array_7k_5_flow_tag
+                    name: EV-7k-5
+                    line_color: orange
+                    line_width: 8
+                    hours_to_show: 12
+                    icon: mdi:solar-panel
+                    color_thresholds:
+                      - value: 0
+                        color: '#ff0000'
+                      - value: 0.5
+                        color: '#ffff00'
+                      - value: 1
+                        color: '#00ff00'
+                columns: 2
+              - square: true
+                type: grid
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.electric_vehicle_sub_array_7k_3_flow_tag
+                    name: EV-7k-3
+                    line_color: orange
+                    line_width: 8
+                    hours_to_show: 12
+                    icon: mdi:solar-panel
+                    color_thresholds:
+                      - value: 0
+                        color: '#ff0000'
+                      - value: 0.5
+                        color: '#ffff00'
+                      - value: 1
+                        color: '#00ff00'
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.electric_vehicle_sub_array_6k_1_flow_tag
+                    name: EV-6k-1
+                    line_color: orange
+                    line_width: 8
+                    hours_to_show: 12
+                    icon: mdi:solar-panel
+                    color_thresholds:
+                      - value: 0
+                        color: '#ff0000'
+                      - value: 0.5
+                        color: '#ffff00'
+                      - value: 1
+                        color: '#00ff00'
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.electric_vehicle_sub_array_6k_1_flow_tag
+                    name: EV-6k-1
+                    line_color: orange
+                    line_width: 8
+                    hours_to_show: 12
+                    icon: mdi:solar-panel
+                    color_thresholds:
+                      - value: 0
+                        color: '#ff0000'
+                      - value: 0.5
+                        color: '#ffff00'
+                      - value: 1
+                        color: '#00ff00'
+                columns: 2
+              - square: false
+                type: grid
+                cards:
+                  - square: true
+                    type: grid
+                    cards:
+                      - type: custom:mini-graph-card
+                        entities:
+                          - sensor.bus_barn_sub_array_5k_1_flow_tag
+                        name: BB-5k-1
+                        line_color: orange
+                        line_width: 8
+                        hours_to_show: 12
+                        icon: mdi:solar-panel
+                        color_thresholds:
+                          - value: 0
+                            color: '#ff0000'
+                          - value: 0.5
+                            color: '#ffff00'
+                          - value: 1
+                            color: '#00ff00'
+                      - type: custom:mini-graph-card
+                        entities:
+                          - sensor.bus_barn_sub_array_5k_2_flow_tag
+                        name: BB-5k-2
+                        line_color: orange
+                        line_width: 8
+                        hours_to_show: 12
+                        icon: mdi:solar-panel
+                        color_thresholds:
+                          - value: 0
+                            color: '#ff0000'
+                          - value: 0.5
+                            color: '#ffff00'
+                          - value: 1
+                            color: '#00ff00'
+                    columns: 2
+                  - type: custom:mini-graph-card
+                    entities:
+                      - entity: sensor.combined_flow
+                        show_graph: false
+                      - entity: sensor.bus_barn_rolled_up_flow
+                        name: Bus Barn
+                      - entity: sensor.electric_vehicle_rolled_up_flow
+                        name: EV Charging
+                    show:
+                      name: false
+                      icon: false
+                    font_size: 55
+                columns: 1
+            columns: 3
+          - square: false
+            type: grid
+            cards:
+              - type: custom:plotly-graph
+                entities:
+                  - entity: sensor.bus_barn_sub_array_5k_1_flow_tag
+                    name: BB-5k-1
+                  - entity: sensor.bus_barn_sub_array_5k_2_flow_tag
+                    name: BB-5k-2
+                  - entity: sensor.bus_barn_sub_array_7k_1_flow_tag
+                    name: BB-7k-1
+                  - entity: sensor.bus_barn_sub_array_7k_2_flow_tag
+                    name: BB-7k-2
+                  - entity: sensor.bus_barn_sub_array_7k_3_flow_tag
+                    name: BB-7k-3
+                  - entity: sensor.bus_barn_sub_array_7k_4_flow_tag
+                    name: BB-7k-4
+                hours_to_show: 24
+                refresh_interval: 10
+                title: Bus Barn Array
+                layout:
+                  height: 300
+              - type: custom:plotly-graph
+                entities:
+                  - entity: sensor.electric_vehicle_sub_array_6k_1_flow_tag
+                    name: EV-6k-1
+                  - entity: sensor.electric_vehicle_sub_array_7k_1_flow_tag
+                    name: EV-7k-1
+                  - entity: sensor.electric_vehicle_sub_array_7k_2_flow_tag
+                    name: EV-7k-2
+                  - entity: sensor.electric_vehicle_sub_array_7k_3_flow_tag
+                    name: EV-7k-3
+                  - entity: sensor.electric_vehicle_sub_array_7k_4_flow_tag
+                    name: EV-7k-4
+                  - entity: sensor.electric_vehicle_sub_array_7k_5_flow_tag
+                    name: EV-7k-5
+                  - entity: sensor.electric_vehicle_sub_array_7k_6_flow_tag
+                    name: EV-7k-6
+                hours_to_show: 24
+                refresh_interval: 10
+                title: Electric Vehicle Array
+                layout:
+                  height: 300
+            columns: 2
+        columns: 1
+  - title: Historical Analysis
+    path: historical-analysis
+    badges: []
+    cards:
+      - type: picture
+        image: >-
+          https://cdn.discordapp.com/attachments/704178090989060157/1155555442844516412/image.png
+      - type: picture
+        image: >-
+          https://cdn.discordapp.com/attachments/704178090989060157/1155557253986918500/CAMirrad.png
+      - type: picture
+        image: >-
+          https://cdn.discordapp.com/attachments/704178090989060157/1155557254393770017/EVirrad.png
+      - type: picture
+        image: >-
+          https://cdn.discordapp.com/attachments/704178090989060157/1155562909729030255/CAMeff.png
+      - type: picture
+        image: >-
+          https://cdn.discordapp.com/attachments/704178090989060157/1155562910005862542/EVeff.png
